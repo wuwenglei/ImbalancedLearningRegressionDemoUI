@@ -1,95 +1,44 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import { RequestRecord, requestRecordDefaultValues } from "@/common/metadata";
+import RequestIdAlert from "@/components/alerts/RequestIdAlert";
+import RechartsAreaChartCard from "@/components/cards/RechartsAreaChartCard";
+import Box from '@mui/material/Box';
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
+
+interface HomeContextValue {
+  requestId : string,
+  setRequestId : Dispatch<SetStateAction<string>>,
+  openRequestIdAlert : boolean,
+  setOpenRequestIdAlert : Dispatch<SetStateAction<boolean>>,
+  requestRecord : RequestRecord,
+  setRequestRecord : Dispatch<SetStateAction<RequestRecord>>,
+}
+export const HomeContext = createContext<HomeContextValue>({
+  requestId: '',
+  setRequestId: () => {},
+  openRequestIdAlert: false,
+  setOpenRequestIdAlert: () => {},
+  requestRecord : requestRecordDefaultValues,
+  setRequestRecord: () => {}
+})
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [requestId, setRequestId] = useState<string>('')
+  const [openRequestIdAlert, setOpenRequestIdAlert] = useState<boolean>(false)
+  const [requestRecord, setRequestRecord] = useState<RequestRecord>(requestRecordDefaultValues)
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  useEffect(() => {
+    if (requestId !== '') {
+      setOpenRequestIdAlert(true)
+    }
+  }, [requestId])
+
+  return (
+    <HomeContext.Provider value={{requestId, setRequestId, openRequestIdAlert, setOpenRequestIdAlert, requestRecord, setRequestRecord}}>
+      <Box position="fixed" left={0} top={0} height="100%" width="100%" margin={0} display="flex" flexDirection="column" sx={{ bgcolor: '#f3f4f9' }}>
+        <RequestIdAlert />
+        <RechartsAreaChartCard />
+      </Box>
+    </HomeContext.Provider>
   );
 }
