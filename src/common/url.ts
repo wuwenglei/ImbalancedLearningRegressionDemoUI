@@ -1,3 +1,3 @@
-const API_BASE_URL : string = 'https://eg8mexy652.execute-api.us-east-1.amazonaws.com/prod/'
+const API_BASE_URL : string = process.env.API_BASE_URL || 'http://localhost:8080/'
 
 export { API_BASE_URL }

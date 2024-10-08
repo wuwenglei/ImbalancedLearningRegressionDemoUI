@@ -31,8 +31,8 @@ import { Icon } from '@iconify/react';
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { HomeContext } from '@/app/page';
 import { getResamplingMethodKeys, getResamplingMethodName, getTaskStatusSnsTopicSubscriptionOptionKeys, getTaskStatusSnsTopicSubscriptionOptionName } from '@/common/metadata';
+import { HomeContext } from '@/components/boxes/MainBox';
 import AcceptSubscriptionAlert from '../../alerts/AcceptSubscriptionAlert';
 import RejectSubscriptionAlert from '../../alerts/RejectSubscriptionAlert';
 import SubscribedSubscriptionAlert from '../../alerts/SubscribedSubscriptionAlert';
@@ -203,7 +203,7 @@ const DialogRequestResamplingTaskForm = () => {
                 </Typography>
               </Grid>
               <Grid size={12}>
-                  <ReadFileButton file={file} setFile={setFile} fileData={fileData} setFileData={setFileData} disabled={isSubmitting} />
+                  <ReadFileButton file={file} setFile={setFile} setFileData={setFileData} disabled={isSubmitting} />
                 </Grid>
                 <Grid size={6}>
                   <FormControl fullWidth>

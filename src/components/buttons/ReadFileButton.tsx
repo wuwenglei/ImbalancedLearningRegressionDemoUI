@@ -5,7 +5,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import FileIcon from '../icons/UploadIcon';
 
 const readFileData = (file : File | null, setter : Dispatch<SetStateAction<string | null>>) => {
-  if (file == null) {
+  if (file === null) {
     setter(null)
     return
   }
@@ -34,12 +34,11 @@ const VisuallyHiddenInput = styled('input')({
 interface ReadFileButtonProps {
   file : File | null,
   setFile : Dispatch<SetStateAction<File | null>>,
-  fileData : string | null,
   setFileData : Dispatch<SetStateAction<string | null>>,
   disabled : boolean
 }
 
-const ReadFileButton = ({file, setFile, fileData, setFileData, disabled} : ReadFileButtonProps) => {
+const ReadFileButton = ({file, setFile, setFileData, disabled} : ReadFileButtonProps) => {
 
   const onFileSelected = (event : ChangeEvent) => {
     const selectedFiles : FileList | null = (event.target as HTMLInputElement)?.files

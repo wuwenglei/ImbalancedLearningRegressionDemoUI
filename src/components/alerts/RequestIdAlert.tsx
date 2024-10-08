@@ -1,6 +1,4 @@
-
 // ** MUI Imports
-import { HomeContext } from '@/app/page';
 import {
     Alert,
     Box,
@@ -10,7 +8,9 @@ import {
     Typography
 } from '@mui/material';
 import { useContext } from 'react';
-import CopyIconButton from '../icon-buttons/CopyIconButton';
+
+import { HomeContext } from '../boxes/MainBox';
+// import CopyIconButton from '../icon-buttons/CopyIconButton';
 import CloseIcon from '../icons/CloseIcon';
 
 const RequestIdAlert = () => {
@@ -28,7 +28,7 @@ const RequestIdAlert = () => {
                     >
                         <Stack direction='row'>
                             <Typography variant='body2'>{requestId !== '' ? `Your request ID: ${requestId}` : 'No resampling task requested!'}</Typography>
-                            {requestId !== '' && <CopyIconButton text={requestId} sx={{mt: -0.5, ml: 0.5}} />}
+                            {/* {requestId !== '' && <CopyIconButton text={requestId} sx={{mt: -0.5, ml: 0.5}} />} */}
                         </Stack>
                     </Alert>
                 </Fade>

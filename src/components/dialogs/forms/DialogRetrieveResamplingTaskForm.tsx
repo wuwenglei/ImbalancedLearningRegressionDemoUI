@@ -23,12 +23,12 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { HomeContext } from '@/app/page';
 import { RequestRecord } from '@/common/metadata';
+import { HomeContext } from '@/components/boxes/MainBox';
 import DownloadBoxIcon from '@/components/icons/DownloadBoxIcon';
 
 const DialogRetrieveResamplingTaskForm = () => {
-  const { requestRecord, setRequestRecord } = useContext(HomeContext)
+  const { setRequestRecord } = useContext(HomeContext)
 
   // ** State
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -159,7 +159,7 @@ const DialogRetrieveResamplingTaskForm = () => {
                         placeholder=''
                         label='Request ID'
                         onChange={event => {
-                          if(value.length < 32 || value.length >= 32 && event.target.value.length < value.length)
+                          if (value.length < 32 || value.length >= 32 && event.target.value.length <= value.length)
                             setValue('requestId', event.target.value.trim(), {shouldDirty: true, shouldTouch: true, shouldValidate: true})
                         }}
                         onBlur={() => trigger('requestId')}

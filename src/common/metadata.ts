@@ -1,15 +1,27 @@
 interface ResamplingMethodName {
     ro : string,
-    uo : string
+    smote : string,
+    gn : string,
+    adasyn : string,
+    ru : string,
+    cnn : string,
+    tomeklinks : string,
+    enn : string
 }
 
 const resamplingMethodNames : ResamplingMethodName = {
     ro: 'Random Oversampling',
-    uo: 'Random Undersampling'
+    smote: 'Synthetic Minority Oversampling Technique (SMOTE)',
+    gn: 'Introduction of Gaussian Noise',
+    adasyn: 'Adaptive Synthetic Sampling (ADASYN)',
+    ru: 'Random Undersampling',
+    cnn: 'Condensed Nearest Neighbor',
+    tomeklinks: 'Tomek Links',
+    enn: 'Edited Nearest Neighbor'
 }
 
-const oversamplingMethods : string[] = ['ro']
-const undersamplingMethods : string[] = ['uo']
+const oversamplingMethods : string[] = ['ro', 'smote', 'gn', 'adasyn']
+const undersamplingMethods : string[] = ['ru', 'cnn', 'tomeklinks', 'enn']
 
 interface TaskStatusSnsTopicSubscriptionOptionName {
     accept : string,
@@ -32,43 +44,44 @@ const getTaskStatusSnsTopicSubscriptionOptionKeys = () : string[] => Object.keys
 const getTaskStatusSnsTopicSubscriptionOptionName = (option : string) : string => taskStatusSnsTopicSubscriptionOptionNames[option as keyof TaskStatusSnsTopicSubscriptionOptionName] || ''
 
 interface ChartDataPoint {
-    name : string,
-    Raw : number,
-    Resampled : number
-  }
-  
-  interface RequestRecord {
-    requestId : string,
-    email : string,
-    method : string,
-    y : string,
-    chartDataSize : number,
-    chartLabelCount : number,
-    chartDataPoints : Array<ChartDataPoint> | null,
-    taskStatusSnsTopicArn : string,
-    taskStatusSnsTopicSubscriptionOption : string,
-    taskStatusSnsTopicSubscriptionArn : string | null,
-    onResampleStartSnsPublishMessageId : string | null,
-    onResampleCompleteSnsPublishMessageId : string | null,
-    onResampleFailSnsPublishMessageId : string | null,
-    originalFileName : string,
-    originalFileNameSuffix : string,
-    s3RawDataBucketName : string,
-    s3RawDataObjectKey : string,
-    s3RawDataFileName : string,
-    s3ResampledDataBucketName : string,
-    s3ResampledDataObjectKey : string,
-    s3ResampledDataFileName : string,
-    recordCreationTime : number,
-    recordExpirationTime : number,
-    resamplingStartTime : number | null,
-    resamplingEndTime : number | null,
-    getPresignedUrlRaw : string | null,
-    getPresignedUrlResampled : string | null
-  }
-  
+  name : string,
+  Raw : number,
+  Resampled : number
+}
+
+interface RequestRecord {
+  requestId : string,
+  email : string,
+  method : string,
+  y : string,
+  chartDataSize : number,
+  chartLabelCount : number,
+  chartDataPoints : Array<ChartDataPoint> | null,
+  taskStatusSnsTopicArn : string,
+  taskStatusSnsTopicSubscriptionOption : string,
+  taskStatusSnsTopicSubscriptionArn : string | null,
+  onResampleStartSnsPublishMessageId : string | null,
+  onResampleCompleteSnsPublishMessageId : string | null,
+  onResampleFailSnsPublishMessageId : string | null,
+  originalFileName : string,
+  originalFileNameSuffix : string,
+  s3RawDataBucketName : string,
+  s3RawDataObjectKey : string,
+  s3RawDataFileName : string,
+  s3ResampledDataBucketName : string,
+  s3ResampledDataObjectKey : string,
+  s3ResampledDataFileName : string,
+  recordCreationTime : number,
+  recordExpirationTime : number,
+  resamplingStartTime : number | null,
+  resamplingEndTime : number | null,
+  getPresignedUrlRaw : string | null,
+  getPresignedUrlResampled : string | null
+}
+
+const getRequestRecordDefaultValues = () => {
   const currentTime : number = new Date().getTime()
-  
+
   const requestRecordDefaultValues = {
     requestId : '',
     email : '',
@@ -99,6 +112,9 @@ interface ChartDataPoint {
     getPresignedUrlResampled : null
   }
 
-export { getResamplingMethodKeys, getResamplingMethodName, getTaskStatusSnsTopicSubscriptionOptionKeys, getTaskStatusSnsTopicSubscriptionOptionName, requestRecordDefaultValues }
+  return requestRecordDefaultValues
+}
+
+export { getRequestRecordDefaultValues, getResamplingMethodKeys, getResamplingMethodName, getTaskStatusSnsTopicSubscriptionOptionKeys, getTaskStatusSnsTopicSubscriptionOptionName }
 export type { RequestRecord }
 

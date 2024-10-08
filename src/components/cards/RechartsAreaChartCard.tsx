@@ -5,7 +5,6 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
-import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -14,42 +13,42 @@ import Typography from '@mui/material/Typography'
 import { Icon } from '@iconify/react'
 import { Area, AreaChart, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 
-import { HomeContext } from '@/app/page'
 import { getResamplingMethodName } from '@/common/metadata'
 import { useContext } from 'react'
+import { HomeContext } from '../boxes/MainBox'
 import DialogRequestResamplingTaskForm from '../dialogs/forms/DialogRequestResamplingTaskForm'
 import DialogRetrieveResamplingTaskForm from '../dialogs/forms/DialogRetrieveResamplingTaskForm'
 import BalanceIcon from '../icons/BalanceIcon'
 import ImbalanceIcon from '../icons/ImbalanceIcon'
 import StickerAlertIcon from '../icons/StickerAlertIcon'
 
-const CustomTooltip = data => {
-  const { active, payload } = data
-  if (active && payload) {
-    return (
-      <div className='recharts-custom-tooltip'>
-        <Card variant="outlined">
-          <Box sx={{m: 2}}>
-            <Typography>{data.label}</Typography>
-            <Divider />
-            {data &&
-              data.payload &&
-              data.payload.map(i => {
-                return (
-                  <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: i.fill, mr: 1.5 } }} key={i.dataKey}>
-                    <Icon icon='mdi:circle' fontSize='0.6rem' />
-                    <Typography variant='body2'>{`${i.dataKey} : ${i.payload[i.dataKey]}`}</Typography>
-                  </Box>
-                )
-              })}
-          </Box>
-        </Card>
-      </div>
-    )
-  }
+// const CustomTooltip = data => {
+//   const { active, payload } = data
+//   if (active && payload) {
+//     return (
+//       <div className='recharts-custom-tooltip'>
+//         <Card variant="outlined">
+//           <Box sx={{m: 2}}>
+//             <Typography>{data.label}</Typography>
+//             <Divider />
+//             {data &&
+//               data.payload &&
+//               data.payload.map(i => {
+//                 return (
+//                   <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: i.fill, mr: 1.5 } }} key={i.dataKey}>
+//                     <Icon icon='mdi:circle' fontSize='0.6rem' />
+//                     <Typography variant='body2'>{`${i.dataKey} : ${i.payload[i.dataKey]}`}</Typography>
+//                   </Box>
+//                 )
+//               })}
+//           </Box>
+//         </Card>
+//       </div>
+//     )
+//   }
 
-  return null
-}
+//   return null
+// }
 
 const CardHeaderTitle = () => {
   const { requestRecord } = useContext(HomeContext)
@@ -137,7 +136,8 @@ const RechartsAreaChartCard = ({ direction = 'normal' }) => {
                 <CartesianGrid />
                 <XAxis dataKey='Target Variable' reversed={direction === 'reversed'} />
                 <YAxis orientation={direction === 'reversed' ? 'right' : 'left'} />
-                <RechartsTooltip content={CustomTooltip} />
+                {/* <RechartsTooltip content={CustomTooltip} /> */}
+                <RechartsTooltip />
                 <Area type="monotone" dataKey='Raw Density' stackId='Raw Density' stroke='0' fill={colorRaw} />
                 <Area type="monotone" dataKey='Resampled Density' stackId='Resampled Density' stroke='0' fill={colorResampled} />
               </AreaChart>
