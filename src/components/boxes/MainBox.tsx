@@ -1,9 +1,11 @@
 'use client'
 import { getRequestRecordDefaultValues, RequestRecord } from "@/common/metadata";
 import RequestIdAlert from "@/components/alerts/RequestIdAlert";
-import RechartsAreaChartCard from "@/components/cards/RechartsAreaChartCard";
 import Box from '@mui/material/Box';
+import dynamic from "next/dynamic";
 import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
+
+const RechartsAreaChartCard = dynamic(() => import('@/components/cards/RechartsAreaChartCard'), { ssr: false })
 
 interface HomeContextValue {
   requestId : string,
