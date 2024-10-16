@@ -58,7 +58,7 @@ const CardHeaderTitle = () => {
       <MUITooltip title = "Download Raw File" placement='top'>
         <span>
           <IconButton disabled={!requestRecord || !requestRecord.getPresignedUrlRaw} onClick={() => {
-            if (requestRecord && requestRecord.getPresignedUrlRaw) {
+            if (requestRecord && requestRecord.getPresignedUrlRaw && typeof window !== 'undefined') {
               window.open(requestRecord?.getPresignedUrlRaw, '_blank');
             }
           }}>
@@ -69,7 +69,7 @@ const CardHeaderTitle = () => {
       <MUITooltip title = "Download Resampled File" placement='top'>
         <span>
           <IconButton disabled={!requestRecord || !requestRecord.getPresignedUrlResampled} onClick={() => {
-            if (requestRecord && requestRecord.getPresignedUrlResampled) {
+            if (requestRecord && requestRecord.getPresignedUrlResampled && typeof window !== 'undefined') {
               window.open(requestRecord?.getPresignedUrlResampled, '_blank');
             }
           }}>
