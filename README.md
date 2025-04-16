@@ -2,7 +2,7 @@
 
 ## Description
 
-This is the user interface for the [ImbalancedLearningRegression](https://github.com/paobranco/ImbalancedLearningRegression) project for demonstration purposes. The UI is accessible at [https://www.imbalanced-learning-regression.com](https://www.imbalanced-learning-regression.com).
+This is the user interface for the [ImbalancedLearningRegression](https://github.com/paobranco/ImbalancedLearningRegression) project for demonstration purposes. The UI is accessible at [imbalanced-learning-regression.com](https://www.imbalanced-learning-regression.com).
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses [`Next.js`](https://nextjs.org), [Material-UI](https://mui.com) and [Recharts](https://recharts.org).
+This project uses [`Next.js`](https://nextjs.org), [`Material-UI`](https://mui.com) and [`Recharts`](https://recharts.org).
 
 The project works together with the [ImbalancedLearningRegressionDemo](https://github.com/wuwenglei/ImbalancedLearningRegressionDemo) project using AWS. Alternatively, you may implement your own backend solution, and provide your own backend API endpoints by setting the environment variable "API_BASE_URL".
 
